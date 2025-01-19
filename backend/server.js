@@ -11,14 +11,19 @@ const app = express();
 // Allow requests from specific origin
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (e.g., mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        // Check if origin contains "localhost"
-        if (/^http:\/\/localhost(:\d+)?$/.test(origin)) {
-          return callback(null, true);
-        } else {
-          return callback(new Error('Not allowed by CORS'));
-        }},
+      // Allow requests with no origin (e.g., mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      // Check if origin contains "localhost"
+      if (/^http:\/\/localhost(:\d+)?$/.test(origin)) {
+        return callback(null, true);
+      } 
+      if (origin === "https://f-web-1.onrender.com") {
+
+      }
+      else {
+        return callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true // If sending cookies or authorization headers
 }));
