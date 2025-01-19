@@ -42,7 +42,7 @@ export default function LandingPage() {
                     <p className="text-[--contrast-color] text-4xl">You should try it</p>    
                     <Link className="mt-8" to={"/upload"}>
                         <button
-                            className="cursor-pointer bg-[--highlight-color] text-[--background-color] font-bold py-2 px-4 rounded-xl sm:rounded-3xl hover:bg-[--highlight-hover-color] text-4xl sm:text-6xl pt-3"
+                            className="cursor-pointer bg-[--highlight-color] text-[--background-color] font-bold py-2 px-4 rounded-xl sm:rounded-3xl hover:bg-[--highlight-hover-color] text-4xl sm:text-6xl pt-3 transition-theme"
                         >
                             NOW!
                         </button>

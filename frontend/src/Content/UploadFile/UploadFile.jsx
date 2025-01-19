@@ -3,6 +3,7 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Components/Button";
+import axios from "axios";
 
 export default function UploadFile() {
 
@@ -32,13 +33,44 @@ export default function UploadFile() {
         // console.log(id);
         // Navigate to /displaypage/:id and pass the JSON data as state
         navigate(`/display`, { state: { data: result } });
-    }        
+    }
+
+    const apiUpload = async(file) => {
+        const formData = new FormData();
+        formData.append('file', file); // 'file' is the key expected by your backend
+        try{
+          const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_URL}/files/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Inform the server about the content type
+            },
+          });
+          console.log(response.data);
+          flash("File uploaded successfully");
+          navigate(`/display`, { state: { data: response.data.fileid } });
+        }
+        catch (e) {
+          let msg;
+          // Enhanced error handling
+          if (e.response) {
+            // Server responded with a status code other than 2xx
+            msg = `Error ${e.response.status}: ${e.response.data || "Server error"}`;
+          } else if (e.request) {
+            // Request was made but no response received
+            msg = "No response received from server";
+          } else {
+            // Something else caused the error
+            msg = ("Error:", e.message)
+          }
+          console.log(msg);
+          flash(msg, "Error");
+        }  
+      }
     
     const onSubmit = (data) => {
         let file = data.uploadFile[0];
         // console.log(file)
-        fr.readAsText(file);
-        // window.location.href = "/display";      
+        // fr.readAsText(file);
+        apiUpload(file);
     }
     
     return (

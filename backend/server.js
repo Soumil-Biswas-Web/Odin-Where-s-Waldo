@@ -1,18 +1,47 @@
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
-import { getEntries } from './databases/database';
+import { authRouter } from './routes/authRouter.js';
+import { filesRouter } from './routes/filesRouter.js';
+import { getEntries } from './databases/database.js';
 
 dotenv.config();
 
 const app = express();
+// Allow requests from specific origin
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (e.g., mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        // Check if origin contains "localhost"
+        if (/^http:\/\/localhost(:\d+)?$/.test(origin)) {
+          return callback(null, true);
+        } else {
+          return callback(new Error('Not allowed by CORS'));
+        }},
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    credentials: true // If sending cookies or authorization headers
+}));
 
-const entires = await getEntries();
-console.log(entires);
+app.use(express.json());
 
+app.use("/auth", authRouter);
+// app.use("/login", loginRouter);
+// app.use("/signup", signupRouter);
+app.use("/files", filesRouter);   // Fetch List of Hardware Files from Database
+
+
+// Fetch Database entries
+// const entires = await getEntries();
+// console.log(entires);
+
+// Run when Starting server
 app.get("/", (req, res) => {
     res.send("Server is ready.");
 })
 
-app.listen(5000, () => {
-    console.log("Server started at http://localhost:5000")
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+    console.log(`Server started at http://localhost:${PORT}`)
 })

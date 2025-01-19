@@ -6,6 +6,9 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './Router'
 import { store } from './Store/store'
 import { Provider } from 'react-redux'
+import { initializeApp } from './utils/initialize';
+
+initializeApp();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

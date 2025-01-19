@@ -7,8 +7,6 @@
 
 * {
     font-family: "Istok Web", sans-serif;
-    transition-duration: 500ms;
-    transition-property: background-color, color;
 }
 
 :root {
@@ -33,6 +31,14 @@
     --contrast-color-offset:#040404;
 }
 
+body{
+    color: var(--contrast-color); 
+}
+
+.transition-theme{
+    transition-duration: 500ms;
+    transition-property: background-color, color, border-color;   
+}
 
 .istok-web-regular {
     font-family: "Istok Web", sans-serif;
@@ -80,3 +86,32 @@
     background-color: #9ca3af; /* Darker gray when hovered */
   }
   
+  /* styles for flash messages */
+
+.ct-toast .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+  }
+  
+  .ct-toast .progress:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--highlight-color);
+  }
+  
+  .progress.active:before {
+    animation: progress 5s linear forwards;
+  }
+  
+  @keyframes progress {
+    100% {
+      right: 100%;
+    }
+  }

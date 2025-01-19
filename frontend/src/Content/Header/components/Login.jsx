@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 
 export default function Login(){
     return (
-        <Button text={"Login"}/>
+        <Link to="/login">
+            <Button text={"Login"}/>
+        </Link>
     )
 }
