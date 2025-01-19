@@ -32,19 +32,19 @@ export default function Team(){
             <div className="grid grid-cols-1 lg:grid-cols-3 w-full p-10 gap-10">
                 <TeamCard
                     name={"Eggy"}
-                    url={"../../../src/assets/Home/eggy.webp"}
+                    url={"Home/eggy.webp"}
                     position={"Desktop Clinet Dev"}
                     quote={"...please don’t publicly introduce us"}
                 />
                 <TeamCard
                     name={"DJakie"}
-                    url={"../../../src/assets/Home/djakie.webp"}
+                    url={"Home/djakie.webp"}
                     position={"DBMS Supervisor"}
                     quote={"I am like... literally the best person in the world. Damn."}
                 />
                 <TeamCard
                     name={"Rugino3"}
-                    url={"../../../src/assets/Home/rugino.webp"}
+                    url={"Home/rugino.webp"}
                     position={"Website Dev"}
                     quote={"I am not known to keep my word."}
                 />

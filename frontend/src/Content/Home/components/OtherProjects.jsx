@@ -32,12 +32,12 @@ export default function OtherProjects(){
             <div className="grid grid-cols-1 md:grid-cols-2 w-full p-10 gap-10 justify-evenly">
                 <ProjectCard
                     name={"FerrumX"}
-                    url={"../../../src/assets/Home/FerrumX.svg"}
+                    url={"Home/FerrumX.svg"}
                     position={"Hardware ID Java Library Wrapper"}
                 />
                 <ProjectCard
                     name={"FeedBack"}
-                    url={"../../../src/assets/Home/FeedBack.svg"}
+                    url={"Home/FeedBack.svg"}
                     position={"Finish Tasks, Level Up"}
                 />
             </div>
