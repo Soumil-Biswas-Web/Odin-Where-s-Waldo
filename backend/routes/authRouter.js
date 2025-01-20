@@ -38,7 +38,7 @@ authRouter.get('/me', authenticateToken, async (req, res) => {
 
 // POST /login route
 authRouter.post('/login', async (req, res) => {
-  console.log(req.body);
+  console.log(`Login request: ${req.body}`);
   const { email_username, password } = req.body;
 
   try {
@@ -74,7 +74,7 @@ authRouter.post('/login', async (req, res) => {
 
 // POST  /signup route
 authRouter.post('/signup', async (req, res) => {
-    console.log(req.body);
+    console.log(`Signup request: ${req.body}`);
     const { email, username, password } = req.body;
     
     try {
