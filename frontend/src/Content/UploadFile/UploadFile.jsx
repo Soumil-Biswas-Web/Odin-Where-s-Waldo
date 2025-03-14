@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Button from "../Components/Button";
 import axios from "axios";
 
@@ -9,6 +10,8 @@ export default function UploadFile() {
 
     const [file, setFile] = useState(null);
     const navigate = useNavigate();
+    const user = useSelector((state) => state.userReducer.user);
+    console.log(user);
     const handleFileChange = (e) => {
         setFile(e.target.files[0].name);
     };
@@ -38,8 +41,9 @@ export default function UploadFile() {
     const apiUpload = async(file) => {
         const formData = new FormData();
         formData.append('file', file); // 'file' is the key expected by your backend
+        formData.append('user', user);
         try{
-          const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_URL}/files/upload`, formData, {
+          const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_URL}/files/upload?user=${user}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data', // Inform the server about the content type
             },

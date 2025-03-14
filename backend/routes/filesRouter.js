@@ -60,10 +60,15 @@ filesRouter.get('/fetch', async (req, res) => {
       }
   
       // Query to fetch files associated with the user
-      const [files] = await pool.query(
-        'SELECT fileid, filename, path, mimetype, uploadDate FROM files WHERE user = ?',
-        [user]
-      );
+      // const result = await pool.query(
+      //   'SELECT fileid, filename, path, mimetype, uploadDate FROM files WHERE "user" = $1',
+      //   [user]
+      // );
+      // const files = result.rows;
+
+      const files = await pool`
+  SELECT fileid, filename, path, mimetype, uploadDate FROM files WHERE "user" = ${user}
+`;
     
         res.json({ success: true, files });
     } catch (error) {
@@ -76,6 +81,7 @@ filesRouter.post('/upload', upload.single('file'), async (req, res) => {
   try {
     let { user } = req.body; // Extract user ID from the request body
     const file = req.file; // Multer attaches file info here
+    // console.log(JSON.stringify(req.body));
     console.log(user);
     console.log(file);
 
@@ -88,10 +94,15 @@ filesRouter.post('/upload', upload.single('file'), async (req, res) => {
     }
 
     // Save file metadata in the database
-    await pool.query(
-      'INSERT INTO files (fileid, filename, path, mimetype, size, user) VALUES (?, ?, ?, ?, ?, ?)',
-      [file.filename, file.originalname, file.path, file.mimetype, file.size, user]
-    );
+    // await pool.query(
+    //   'INSERT INTO files (fileid, filename, path, mimetype, size, "user") VALUES ($1, $2, $3, $4, $5, $6)',
+    //   [file.filename, file.originalname, file.path, file.mimetype, file.size, user]
+    // );
+
+    await pool`
+  INSERT INTO files (fileid, filename, path, mimetype, size, "user")
+  VALUES (${file.filename}, ${file.originalname}, ${file.path}, ${file.mimetype}, ${file.size}, ${user})
+`;
 
     res.json({ success: true, message: 'File uploaded successfully', fileid: file.filename });
   } catch (error) {
@@ -106,13 +117,18 @@ filesRouter.get('/use', async (req, res) => {
     const { fileid } = req.query;
 
     // Query the database to get the file metadata
-    const [rows] = await pool.query('SELECT path, mimetype, filename FROM files WHERE fileid = ?', [fileid]);
+    // const result = await pool.query('SELECT path, mimetype, filename FROM files WHERE fileid = $1', [fileid]);
+    // const rows = result.rows;
 
-    if (rows.length === 0) {
+    const files = await pool`
+      SELECT path, mimetype, filename FROM files WHERE fileid = ${fileid}
+    `;
+    
+    if (files.length === 0) {
       return res.status(404).json({ message: 'File not found' });
     }
 
-    const fileData = rows[0];
+    const fileData = files[0];
 
     // Ensure the file exists on the server
     // if (!fs.existsSync(fileData.path)) {

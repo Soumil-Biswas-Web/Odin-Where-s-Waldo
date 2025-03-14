@@ -70,7 +70,10 @@ export default function Dashboard() {
                 {readings.map((reading, index) => (
                   <tr key={index}>
                     <th className='border-t-[1px] border-gray-400 py-5'><button onClick={() => nav(reading.fileid)} className='hover:text-[color:--highlight-hover-color]'>{reading.filename}</button></th>
-                    <th className='border-t-[1px] border-gray-400 py-5'>{format(new Date(reading.uploadDate), "yyyy-MM-dd HH:mm:ss")}</th>
+                    {/* <th className='border-t-[1px] border-gray-400 py-5'>{format(new Date(reading.uploadDate), "yyyy-MM-dd HH:mm:ss")}</th> */}
+                    <th className='border-t-[1px] border-gray-400 py-5'>
+                    {reading.uploaddate ? format(new Date(reading.uploaddate), "yyyy-MM-dd HH:mm:ss") : "No date available"}
+                    </th>
                   </tr>              
                 ))}
               </tbody>
