@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 import path from "path";
 import { pool } from "../databases/database.js";
+import { authRefreshToken } from "../middleware/jwt.js";
 
 // Configure storage for uploaded files
 const storage = multer.diskStorage({
@@ -60,49 +61,41 @@ filesRouter.get('/fetch', async (req, res) => {
       }
   
       // Query to fetch files associated with the user
-      // const result = await pool.query(
-      //   'SELECT fileid, filename, path, mimetype, uploadDate FROM files WHERE "user" = $1',
-      //   [user]
-      // );
-      // const files = result.rows;
-
-      const files = await pool`
-  SELECT fileid, filename, path, mimetype, uploadDate FROM files WHERE "user" = ${user}
-`;
+      const {rows:files} = await pool.query(
+        'SELECT fileid, filename, path, mimetype, uploadDate FROM files WHERE "user" = $1',
+        [user]
+      );
     
-        res.json({ success: true, files });
+      res.json({ success: true, files });
     } catch (error) {
         console.error('Error fetching files:', error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 })
 
-filesRouter.post('/upload', upload.single('file'), async (req, res) => {
+filesRouter.post('/upload', upload.single('file'), authRefreshToken, async (req, res) => {
   try {
-    let { user } = req.body; // Extract user ID from the request body
+    console.log('Request User:', req.user); // Log the user from the JWT
+    const user = req.user.username;
+
     const file = req.file; // Multer attaches file info here
     // console.log(JSON.stringify(req.body));
     console.log(user);
     console.log(file);
 
     if (!file) {
-      return res.status(400).json({ message: 'File and user ID are required' });
+      return res.status(400).json({ message: 'No File Detected' });
     }
 
     if (!user) {
-      user = "Guest";
+      return res.status(400).json({ message: 'No User Detected' });
     }
 
     // Save file metadata in the database
-    // await pool.query(
-    //   'INSERT INTO files (fileid, filename, path, mimetype, size, "user") VALUES ($1, $2, $3, $4, $5, $6)',
-    //   [file.filename, file.originalname, file.path, file.mimetype, file.size, user]
-    // );
-
-    await pool`
-  INSERT INTO files (fileid, filename, path, mimetype, size, "user")
-  VALUES (${file.filename}, ${file.originalname}, ${file.path}, ${file.mimetype}, ${file.size}, ${user})
-`;
+    await pool.query(
+      'INSERT INTO files (fileid, filename, path, mimetype, size, "user") VALUES ($1, $2, $3, $4, $5, $6)',
+      [file.filename, file.originalname, file.path, file.mimetype, file.size, user]
+    );
 
     res.json({ success: true, message: 'File uploaded successfully', fileid: file.filename });
   } catch (error) {

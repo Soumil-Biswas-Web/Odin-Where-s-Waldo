@@ -3,9 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { authRouter } from './routes/authRouter.js';
 import { filesRouter } from './routes/filesRouter.js';
-import { getEntries } from './databases/database.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
+
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -13,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define the allowed origins
 const allowedOrigins = [
-  "http://localhost:5173",          // Your local frontend (adjust port as needed)
+  (`http://localhost:${PORT}`),       // Your local frontend (adjust port as needed)
   "https://f-web-1.onrender.com",     // Your Render backend or frontend domain if applicable
   "https://f-web-1-l16f.onrender.com/login",
   "https://f-web-q60t.onrender.com"
@@ -63,23 +65,16 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/auth", authRouter);
-// app.use("/login", loginRouter);
-// app.use("/signup", signupRouter);
 app.use("/files", filesRouter);   // Fetch List of Hardware Files from Database
 
-
-// Fetch Database entries
-// const entires = await getEntries();
-// console.log(entires);
 
 // Run when Starting server
 app.get("/", (req, res) => {
     res.send("Server is ready.");
 })
-
-const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`)
