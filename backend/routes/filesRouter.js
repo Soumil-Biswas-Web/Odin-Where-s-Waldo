@@ -1,32 +1,9 @@
 import { Router } from "express";
-import multer from "multer";
-import path from "path";
+import upload from "../middleware/multerUploader.js";
 import { pool } from "../databases/database.js";
 import { authRefreshToken } from "../middleware/jwt.js";
+import {uploadToCloudinary, deleteFronCloudinary} from "../middleware/cloudinaryInit.js";
 
-// Configure storage for uploaded files
-const storage = multer.diskStorage({
-  destination: 'backend/uploads',
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1024 * 1024 }, // 5MB file size limit
-  fileFilter: (req, file, cb) => {
-    const filetypes = /json/; // Allowed file types
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb(new Error('Only JSON files are allowed!'));
-    }
-  },
-});
 
 function parseFilename(storedFilename) {    // Use it if you need to
   // Split the filename at the first hyphen
@@ -75,12 +52,13 @@ filesRouter.get('/fetch', async (req, res) => {
 
 filesRouter.post('/upload', upload.single('file'), authRefreshToken, async (req, res) => {
   try {
+    console.log("Uploading file...");
     console.log('Request User:', req.user); // Log the user from the JWT
     const user = req.user.username;
 
     const file = req.file; // Multer attaches file info here
     // console.log(JSON.stringify(req.body));
-    console.log(user);
+
     console.log(file);
 
     if (!file) {
@@ -91,10 +69,14 @@ filesRouter.post('/upload', upload.single('file'), authRefreshToken, async (req,
       return res.status(400).json({ message: 'No User Detected' });
     }
 
+    // Upload file to Coudinary
+    const result = await uploadToCloudinary(file);
+    console.log(result);
+
     // Save file metadata in the database
     await pool.query(
       'INSERT INTO files (fileid, filename, path, mimetype, size, "user") VALUES ($1, $2, $3, $4, $5, $6)',
-      [file.filename, file.originalname, file.path, file.mimetype, file.size, user]
+      [result.public_id, file.originalname, result.secure_url, file.mimetype, file.size, user]
     );
 
     res.json({ success: true, message: 'File uploaded successfully', fileid: file.filename });
@@ -104,18 +86,14 @@ filesRouter.post('/upload', upload.single('file'), authRefreshToken, async (req,
   }  
 });
 
+// Send back file (path) to display page
 filesRouter.get('/use', async (req, res) => {
   console.log(req.query);
   try {
     const { fileid } = req.query;
 
     // Query the database to get the file metadata
-    // const result = await pool.query('SELECT path, mimetype, filename FROM files WHERE fileid = $1', [fileid]);
-    // const rows = result.rows;
-
-    const files = await pool`
-      SELECT path, mimetype, filename FROM files WHERE fileid = ${fileid}
-    `;
+    const {rows:files} = await pool.query('SELECT path, mimetype, filename FROM files WHERE fileid = $1', [fileid]);
     
     if (files.length === 0) {
       return res.status(404).json({ message: 'File not found' });
@@ -123,15 +101,8 @@ filesRouter.get('/use', async (req, res) => {
 
     const fileData = files[0];
 
-    // Ensure the file exists on the server
-    // if (!fs.existsSync(fileData.path)) {
-    //   return res.status(404).json({ message: 'File not found on the server' });
-    // }
-
-    // Set appropriate headers and send the file
-    res.setHeader('Content-Disposition', `attachment; filename="${fileData.filename}"`);
-    res.setHeader('Content-Type', fileData.mimetype);
-    res.sendFile(path.resolve(fileData.path));      
+    console.log(fileData.path);
+    res.redirect(fileData.path); 
 
   } catch (error) {
       console.error('Error fetching file:', error);
