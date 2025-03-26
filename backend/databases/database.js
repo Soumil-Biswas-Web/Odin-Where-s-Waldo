@@ -1,55 +1,52 @@
 import env from 'dotenv';
 
-import pkg from 'pg';
-const { Pool } = pkg;
+// Uncomment this to use local psql db
+// import pkg from 'pg';
+// const { Pool } = pkg;
 
-env.config();
+// env.config();
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+// const pool = new Pool({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+// });
 
-async function getEntries() {
-  const result = await pool.query("SELECT * FROM main");
-  return result.rows;
-}
+// async function getEntries() {
+//   const result = await pool.query("SELECT * FROM main");
+//   return result.rows;
+// }
 
-export { getEntries, pool };
+// export { getEntries, pool };
 
+// Uncomment this to use Neon psql db
+import { neon } from '@neondatabase/serverless';
 
-// import { neon } from '@neondatabase/serverless';
-
-// const sql = neon(process.env.DATABASE_URL);
+const sql = neon(process.env.DATABASE_URL);
 
 
 //  I added this bit from chatGPt, test it before making the damn thing live
-// const pool = {
-//   query: async (text, params) => {
-//     return {
-//       rows: await sql(text, params),
-//     };
-//   },
-// };
+const pool = {
+  query: async (text, params) => {
+    return {
+      rows: await sql(text, params),
+    };
+  },
+};
 
-// async function getEntries() {
-//   const result = await sql`SELECT * FROM main`;
-//   return result; // result is an array of rows
-// }
+async function getEntries() {
+  const result = await sql`SELECT * FROM main`;
+  return result; // result is an array of rows
+}
 
-// const requestHandler = async (req, res) => {
-//   const result = await sql`SELECT version()`;
-//   const { version } = result[0];
-//   res.writeHead(200, { "Content-Type": "text/plain" });
-//   res.end(version);
-// };
+const requestHandler = async (req, res) => {
+  const result = await sql`SELECT version()`;
+  const { version } = result[0];
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end(version);
+};
 
-// console.log(requestHandler);
+console.log(requestHandler);
 
-// export { getEntries, sql as pool };
-//  will be changed with:
-// export { getEntries, pool };
-// pay attention to the end mf
-
+export { getEntries, pool };
