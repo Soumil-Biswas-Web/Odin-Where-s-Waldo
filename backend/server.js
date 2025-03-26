@@ -68,7 +68,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // To Require API Keys:
-// app.use(authMiddleware);
+app.use(authMiddleware);
 
 app.use("/auth", authRouter);
 app.use("/files", filesRouter);   // Fetch List of Hardware Files from Database
