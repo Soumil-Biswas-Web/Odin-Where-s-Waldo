@@ -23,6 +23,8 @@ import env from 'dotenv';
 // Uncomment this to use Neon psql db
 import { neon } from '@neondatabase/serverless';
 
+env.config();
+
 const sql = neon(process.env.DATABASE_URL);
 
 
