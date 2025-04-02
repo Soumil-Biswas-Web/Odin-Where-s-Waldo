@@ -33,7 +33,9 @@ export default function Login() {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_REACT_SERVER_URL}/auth/login`,
-        data
+        data, {
+          headers: { 'x-api-key': import.meta.env.VITE_F_WEB_API_KEY }
+        }
       );
       const { token, username } = response.data;
       // console.log(token);

@@ -19,7 +19,10 @@ export default function Dashboard() {
     const apiFetch = async() => {
       try{
         const response = await axios.get(
-          `${import.meta.env.VITE_REACT_SERVER_URL}/files/fetch`, {params: { user }}
+          `${import.meta.env.VITE_REACT_SERVER_URL}/files/fetch`, {
+            headers: { 'x-api-key': import.meta.env.VITE_F_WEB_API_KEY },
+            params: { user }
+          }
         );
         console.log(response.data);
         setReadings(response.data.files);   // Set Variable `readings` to contain the api response

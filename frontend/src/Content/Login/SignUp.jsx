@@ -39,7 +39,9 @@ export default function SignUp() {
     try {
       await axios.post(
         `${import.meta.env.VITE_REACT_SERVER_URL}/auth/signup`,
-        data
+        data, {
+          headers: { 'x-api-key': import.meta.env.VITE_F_WEB_API_KEY }
+        }
       );
       // localStorage.setItem("token", response.data);
       flash("Created Account successfully");

@@ -50,7 +50,10 @@ export default function Stats () {
         const apiUse = async() => {     // Fetch the file whose info to be diplayed
           try{
             const response = await axios.get(
-              `${import.meta.env.VITE_REACT_SERVER_URL}/files/use`, {params: { fileid }}
+              `${import.meta.env.VITE_REACT_SERVER_URL}/files/use`, {
+                    params: { fileid },
+                    headers: { 'x-api-key': import.meta.env.VITE_F_WEB_API_KEY }
+                }
             );
             console.log(response.data);
             setFile(response.data.files);   // Set Variable `readings` to contain the api response

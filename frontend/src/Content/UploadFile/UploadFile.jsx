@@ -46,6 +46,7 @@ export default function UploadFile() {
           const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_URL}/files/upload?user=${user}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data', // Inform the server about the content type
+                'x-api-key': import.meta.env.VITE_F_WEB_API_KEY
             },
           });
           console.log(response.data);
