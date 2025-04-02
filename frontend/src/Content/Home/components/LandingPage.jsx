@@ -2,8 +2,11 @@ import { Link } from "react-router-dom"
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 export default function LandingPage() {
+
+    const user = useSelector((state) => state.userReducer.user);
 
     const heroSection = useRef(null);
     const tagline = useRef(null);
@@ -40,7 +43,7 @@ export default function LandingPage() {
                 <h1 ref={tagline2} className="text-[3rem] md:text-[4rem] lg:text-[6rem] xl:text-[8rem] bg-[image:--highlight-gradient] bg-clip-text text-transparent font-bold lg:ml-[150px] xl:ml-[250px]">in a Blitz!</h1>
                 <div ref={CTA} className="mr-6">
                     <p className="text-[--contrast-color] text-4xl">You should try it</p>    
-                    <Link className="mt-8" to={"/upload"}>
+                    <Link className="mt-8" to={(user === null)? "/login" : "/dashboard"}>
                         <button
                             className="cursor-pointer bg-[--highlight-color] text-[--background-color] font-bold py-2 px-4 rounded-xl sm:rounded-3xl hover:bg-[--highlight-hover-color] text-4xl sm:text-6xl pt-3 transition-theme"
                         >

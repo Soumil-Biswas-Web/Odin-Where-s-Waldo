@@ -62,7 +62,10 @@ export default function Dashboard() {
         {(readings.length !== 0) 
           ? (
             <table className='w-4/5 bg-[--background-color-offset] rounded-[30px] transition-theme'>
-              <caption className='font-semibold mb-10'>Uploaded Readings...</caption>
+              <caption className='font-semibold mb-10'>
+                Uploaded Readings...&nbsp;
+                <Link to={"/upload"}><Button text={"Upload More"}/></Link>
+              </caption>
               <thead className=''>
                 <tr>
                   <th className='py-5'>File</th>

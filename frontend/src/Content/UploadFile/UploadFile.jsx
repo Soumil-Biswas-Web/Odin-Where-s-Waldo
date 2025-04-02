@@ -58,7 +58,7 @@ export default function UploadFile() {
           // Enhanced error handling
           if (e.response) {
             // Server responded with a status code other than 2xx
-            msg = `Error ${e.response.status}: ${e.response.data || "Server error"}`;
+            msg = `Error ${e.response.status}: ${e.response.data.message || "Server error"}`;
           } else if (e.request) {
             // Request was made but no response received
             msg = "No response received from server";
