@@ -1,0 +1,2524 @@
+{
+	"info": {
+		"_postman_id": "c18119b4-22a1-4550-9475-992ef80ead45",
+		"name": "Ferrum Web Unified API Documentation: Authentication & File Management",
+		"description": "This comprehensive API documentation provides a single source of truth for managing user authentication and file operations. It details endpoints for user signup, login, and profile retrieval alongside endpoints for uploading, fetching, and downloading files. Designed for clarity and ease-of-use, the documentation includes request/response examples, parameter descriptions, and error handling guidelines to help developers integrate seamlessly with our services.\n\n> **Base URL:**  \n**`https://ferrum-web.onrender.com`** \n  \n\n###### All endpoints described in this document should be appended to the above URL.\n\n###### For example, if an endpoint is `/auth/login`, the full URL will be:\n\n`https://ferrum-web.onrender.com/auth/login`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38110344"
+	},
+	"item": [
+		{
+			"name": "/auth/me",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM0OTg0NzksImV4cCI6MTc0MzUwMjA3OX0.FurqpxZTcY4ZjS2QS_VN-GVlO9JYOTLZvh8QlWfYab8",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/auth/me",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"auth",
+						"me"
+					]
+				},
+				"description": "Retrieves details of the currently authenticated user by verifying the **JWT token** provided in the Authorization header."
+			},
+			"response": [
+				{
+					"name": "Success Response (200 OK)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM0OTY5ODcsImV4cCI6MTc0MzUwMDU4N30.pylJuufJzZM-Wh0wwO57KDzPQXSSGUQgjMGLwholjbE",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/me",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:49:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"3e-ObBPZa4zsCbplU73DVKDC4EVydY\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "21059f50-bcb4-4a54"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296d49f1e3f3f6d-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 33,\n    \"username\": \"exampleuser\",\n    \"email\": \"example@gmail.com\"\n}"
+				},
+				{
+					"name": "Wrong Token or Expired Token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM0OTY5ODcsImV4cCI6MTc0MzUwMDU4N30.pylJuufJzZM-Wh0wwO57KDzPQXSSGUQgjMGLwholj",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/me",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:49:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"2b-OSfHEpdXihNiqy77dCPrB7ZGX3E\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "42b960cf-7f91-4b8b"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296d5d278cf3f6d-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid token. Access denied.\"\n}"
+				},
+				{
+					"name": "No token Provided",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/me",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:50:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1f-pH1WDG8cD7FkBQ1VUfuCbs1vDSY\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "b3081df3-6557-4869"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296d75aa8643ab3-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Token is required\"\n}"
+				},
+				{
+					"name": "User Does not Exist or Deleted",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM0OTc4NDcsImV4cCI6MTc0MzUwMTQ0N30.rjbLsgCaxYO-7mseI8m6AbwEmmSRW4rg9zoUoKj76aY",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/me",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:58:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1c-ZEVVcvtFhxKX/QUvVKqKxwGbbNA\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "f647d921-297d-45f8"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296e282995b2dfc-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"User not found\"\n}"
+				},
+				{
+					"name": "user ID is 0 or Null or Server fails to get user id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwidXNlcm5hbWUiOiJleGFtcGxldXNlciIsImlhdCI6MTc0MzQ5ODA1NiwiZXhwIjoxNzQzNTAxNjU2fQ.kUgpkPlWFDrLZskYK4ShpYVKZEUqryIH0Zlv6FHUVkM",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/me",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:01:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "42"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"26-keAuGxfvinwoInZsS/Lo7q9BS+M\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "ea96bcea-b572-4c69"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296e6a91edb3a23-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid user ID in token\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/auth/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email_username",
+							"value": "exampleuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "exampleuser1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/auth/login",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "Authenticates a user using either their email or username along with a password. On success, returns a **JWT token** and the **username**."
+			},
+			"response": [
+				{
+					"name": "Success Response (200 OK)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email_username",
+									"value": "exampleuser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "exampleuser1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:43:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "179"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"d1-WczAslwWLWDrbxPcfeIR0Xx7cvk\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "9c690e83-de4b-4c49"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM0OTY5ODcsImV4cCI6MTc0Mzc1NjE4N30.-XoNYFsFkv6SuO422SMPVWbYxg69zB6TbZtAIqCcbhg; Max-Age=259200; Path=/; Expires=Fri, 04 Apr 2025 08:43:07 GMT; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296cbfffccf4043-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM0OTY5ODcsImV4cCI6MTc0MzUwMDU4N30.pylJuufJzZM-Wh0wwO57KDzPQXSSGUQgjMGLwholjbE\",\n    \"username\": \"exampleuser\"\n}"
+				},
+				{
+					"name": "Incorrect Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email_username",
+									"value": "exampleuser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "anotheruser1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:44:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"10-l/9ohNb/MR2iEbDpQAM85D5SIbI\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "d8c338c8-3216-4b6b"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296cdcd3cb83fa9-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "Invalid password"
+				},
+				{
+					"name": "Wrong Username",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email_username",
+									"value": "anotheruser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "anotheruser1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:45:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"e-AeuUaVSDFyr5HsjCcV+fKNkZtqs\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "3509fedb-4399-4331"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296cef29c323fa9-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "User not found"
+				},
+				{
+					"name": "Missing Username or Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email_username",
+									"value": "exampleuser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:45:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"30-tq08YTcRS7M5KVvI3qu8Enw5uQA\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "a1bf72cb-8723-4199"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296cfffea343fa9-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "Bad Request: Missing email_username or password."
+				}
+			]
+		},
+		{
+			"name": "/auth/refresh",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "jwt",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/auth/refresh",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"auth",
+						"refresh"
+					]
+				},
+				"description": "generates a **new access token** using a **refresh token** stored in cookies."
+			},
+			"response": [
+				{
+					"name": "Success Response (200 OK)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "jwt",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/refresh",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:58:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "164"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"be-bgPQqO8inS4dx4DyjNuyncCAs7k\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "4721ba97-1968-4d80"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "929739db9d723206-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsInVzZXJuYW1lIjoiZXhhbXBsZXVzZXIiLCJpYXQiOjE3NDM1MDE0ODUsImV4cCI6MTc0MzUwNTA4NX0.eIKAQZ49-LftrJDRV-o4o0gvH6gyxIgMReGXhM_37WY\"\n}"
+				},
+				{
+					"name": "Wrong Refresh Token or Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/refresh",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"status": "Not Acceptable",
+					"code": 406,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 10:02:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "30"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "131b1206-e97b-4cd4"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "92973fea08323c10-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Unauthorized\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/auth/signup",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "example@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "exampleuser1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/auth/signup",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"auth",
+						"signup"
+					]
+				},
+				"description": "Registers a new user. The endpoint accepts the user’s email, username, and password. The password is hashed before storing it in the database."
+			},
+			"response": [
+				{
+					"name": "Success Response (201 Created)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "example@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "exampleuser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "exampleuser1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/signup",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:39:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"19-TL6irb4Yq98RS/prt1iRZy/pmao\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "9bdabfac-bb60-401f"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296c739fbfe3ffb-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "User created successfully"
+				},
+				{
+					"name": "Email is already in use",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "example@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "exampleuser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "exampleuser1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/auth/signup",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 08:31:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"17-w2kmEVn/Tzo4AuO2h4x9AK2Ju2E\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "190d261f-b6ce-4217"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296bb29280c0029-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "Email is already in use"
+				}
+			]
+		},
+		{
+			"name": "/files/fetch",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/files/fetch?user=exampleuser",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"files",
+						"fetch"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "exampleuser"
+						}
+					]
+				},
+				"description": "Retrieves metadata for all files associated with a specific user."
+			},
+			"response": [
+				{
+					"name": "Successful Fetch (Response 200 OK)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/fetch?user=exampleuser",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"fetch"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "exampleuser"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:09:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "250"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"288-30fEdD+MCZPwH6ah+NPLWfww17Y\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "bafe1ce9-2807-428b"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296f239ff80002c-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"files\": [\n        {\n            \"fileid\": \"1741891621805-example.json\",\n            \"filename\": \"example.json\",\n            \"path\": \"backend/uploads/1741891621805-example.json\",\n            \"mimetype\": \"application/json\",\n            \"uploaddate\": \"2025-03-13T18:47:02.423Z\"\n        },\n        {\n            \"fileid\": \"1741892025276-example.json\",\n            \"filename\": \"example.json\",\n            \"path\": \"backend/uploads/1741892025276-example.json\",\n            \"mimetype\": \"application/json\",\n            \"uploaddate\": \"2025-03-13T18:53:46.973Z\"\n        },\n        {\n            \"fileid\": \"fileuploader/kt2laocafoh0eh0zcjzc\",\n            \"filename\": \"example.json\",\n            \"path\": \"https://res.cloudinary.com/dqs88lmp0/raw/upload/v1743498223/fileuploader/kt2laocafoh0eh0zcjzc\",\n            \"mimetype\": \"application/json\",\n            \"uploaddate\": \"2025-04-01T09:03:43.879Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "username not given",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/fetch?user=",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"fetch"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:10:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"21-Pv+bMrBCqerCxF01JKAFjSsS2Hk\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "4fc0bfa1-5887-4112"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296f4061fa7ff6e-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"User ID is required\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/files/upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 500\", function () {\r",
+							"  pm.response.to.have.status(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aniket/OneDrive/Desktop/example.json"
+						},
+						{
+							"key": "user",
+							"value": "exampleuser",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/files/upload",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"files",
+						"upload"
+					]
+				},
+				"description": "Uploads a **JSON** file and associates it with a user. If no user is provided, the file is uploaded with a default \"**Guest**\" user\n\n_Note: Only files with a_ `.json` _extension and matching MIME type (\\`__**application/json**__\\`_) are allowed."
+			},
+			"response": [
+				{
+					"name": "Success Response (200 OK)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Aniket/OneDrive/Desktop/example.json"
+								},
+								{
+									"key": "user",
+									"value": "exampleuser",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/upload",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:03:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"37-gUN167+bKP3LiHYHxri8pslsW7s\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "ac979a67-c8e6-481e"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296ea310a453a23-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"File uploaded successfully\"\n}"
+				},
+				{
+					"name": "File or user is Missing",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "user",
+									"value": "exampleuser",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/upload",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"upload"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:05:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1e-Xt0OKkEunOSbGK6V5XDDiQDrg1w\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "493ba221-5e13-4797"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296ec1a6a646efe-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"No File Detected\"\n}"
+				},
+				{
+					"name": "Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Aniket/OneDrive/Desktop/106105191.pdf"
+								},
+								{
+									"key": "user",
+									"value": "exampleuser",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/upload",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"upload"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 13 Mar 2025 18:52:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "102"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'none'"
+						},
+						{
+							"key": "rndr-id",
+							"value": "b58b5b57-d111-4182"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "91fdb9df4bf07f71-MAA"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Internal Server Error</pre>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "/files/use",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://ferrum-web.onrender.com/files/use?fileid=fileuploader/jzxfvs7jsppzc",
+					"protocol": "https",
+					"host": [
+						"ferrum-web",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"files",
+						"use"
+					],
+					"query": [
+						{
+							"key": "fileid",
+							"value": "fileuploader/jzxfvs7jsppzc"
+						}
+					]
+				},
+				"description": "Downloads a file based on its file ID. This endpoint returns the file with proper headers so that it can be downloaded or displayed by the client."
+			},
+			"response": [
+				{
+					"name": "Success Response (200 OK)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/use?fileid=fileuploader/jzxfvs7jsppzc4qfv6do",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"use"
+							],
+							"query": [
+								{
+									"key": "fileid",
+									"value": "fileuploader/jzxfvs7jsppzc4qfv6do"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "raw",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:16:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/octet-stream"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4661"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "9296fcc919043a1b-BOM"
+						},
+						{
+							"key": "Accept-Ranges",
+							"value": "bytes"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "public, no-transform, immutable, max-age=2592000"
+						},
+						{
+							"key": "Content-Disposition",
+							"value": "attachment; filename=\"jzxfvs7jsppzc4qfv6do\""
+						},
+						{
+							"key": "ETag",
+							"value": "\"34262fec301fe1d1427edaaaf4b9b756\""
+						},
+						{
+							"key": "Last-Modified",
+							"value": "Tue, 01 Apr 2025 09:12:15 GMT"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=604800"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "Content-Length,Content-Disposition,ETag,Server-Timing,Vary"
+						},
+						{
+							"key": "server-timing",
+							"value": "cld-cloudflare;dur=1008;start=2025-04-01T09:16:23.869Z;desc=miss,rtt;dur=44;cloudinary;dur=144;start=2025-04-01T09:16:24.657Z"
+						},
+						{
+							"key": "timing-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-request-id",
+							"value": "e464fc1d31433aadaf9b2b2f3aa08c17"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						}
+					],
+					"cookie": [],
+					"body": "{\"Storage\":{\"\\\\\\\\.\\\\PHYSICALDRIVE0\":{\"Caption\":\"TOSHIBA DT01ACA100\",\"Model\":\"TOSHIBA DT01ACA100\",\"Size\":\"1000202273280\",\"FirmwareRevision\":\"MS2OA750\",\"SerialNumber\":\"776VH3UNS\",\"Partitions\":\"1\",\"Status\":\"OK\",\"InterfaceType\":\"IDE\",\"PNPDeviceID\":\"SCSI\\\\DISK&VEN_TOSHIBA&PROD_DT01ACA100\\\\5&BC4E48B&0&000000\"},\"\\\\\\\\.\\\\PHYSICALDRIVE1\":{\"Caption\":\"TOSHIBA MQ01ABD100\",\"Model\":\"TOSHIBA MQ01ABD100\",\"Size\":\"1000202273280\",\"FirmwareRevision\":\"AX1P6E\",\"SerialNumber\":\"Y6HAPKH1T\",\"Partitions\":\"1\",\"Status\":\"OK\",\"InterfaceType\":\"IDE\",\"PNPDeviceID\":\"SCSI\\\\DISK&VEN_TOSHIBA&PROD_MQ01ABD100\\\\5&BC4E48B&0&020000\"},\"\\\\\\\\.\\\\PHYSICALDRIVE2\":{\"Caption\":\"Samsung SSD 980 500GB\",\"Model\":\"Samsung SSD 980 500GB\",\"Size\":\"500105249280\",\"FirmwareRevision\":\"3B4QFXO7\",\"SerialNumber\":\"0025_38D7_21A3_C3C1.\",\"Partitions\":\"3\",\"Status\":\"OK\",\"InterfaceType\":\"SCSI\",\"PNPDeviceID\":\"SCSI\\\\DISK&VEN_NVME&PROD_SAMSUNG_SSD_980\\\\5&15BB7AC4&0&000000\"}},\"HardwareID\":\"AMD Ryzen 5 5600G with Radeon Graphics\\/178BFBFF00A50F00\\/B550M AORUS ELITE\\/Y6HAPKH1T776VH3UNS0025_38D7_21A3_C3C1.\",\"BIOS\":{\"Name\":\"FDd\",\"Caption\":\"FDd\",\"Manufacturer\":\"American Megatrends International, LLC.\",\"ReleaseDate\":\"25-12-2023 05:30:00 AM\",\"SMBIOSPResent\":\"True\",\"Status\":\"OK\",\"Version\":\"ALASKA - 1072009\",\"CurrentLanguage\":\"en|US|iso8859-1\",\"SMBIOSBIOSVersion\":\"FDd\"},\"Memory\":{\"Physical Memory 0\":{\"Name\":\"Physical Memory\",\"Manufacturer\":\"Unknown\",\"Model\":\"\",\"OtherIdentifyingInfo\":\"\",\"PartNumber\":\"CMK8GX4M1E3200C16\",\"Tag\":\"Physical Memory 0\",\"FormFactor\":\"8\",\"BankLabel\":\"P0 CHANNEL A\",\"Capacity\":\"8589934592\",\"DataWidth\":\"64\",\"Speed\":\"3200\",\"ConfiguredClockSpeed\":\"3200\",\"DeviceLocator\":\"DIMM 0\",\"SerialNumber\":\"00000000\"},\"Physical Memory 2\":{\"Name\":\"Physical Memory\",\"Manufacturer\":\"Unknown\",\"Model\":\"\",\"OtherIdentifyingInfo\":\"\",\"PartNumber\":\"CMK8GX4M1E3200C16\",\"Tag\":\"Physical Memory 2\",\"FormFactor\":\"8\",\"BankLabel\":\"P0 CHANNEL B\",\"Capacity\":\"8589934592\",\"DataWidth\":\"64\",\"Speed\":\"3200\",\"ConfiguredClockSpeed\":\"3200\",\"DeviceLocator\":\"DIMM 0\",\"SerialNumber\":\"00000000\"}},\"Network\":{\"13\":{\"Name\":\"Realtek PCIe GbE Family Controller #2\",\"Description\":\"Realtek PCIe GbE Family Controller\",\"PNPDeviceID\":\"PCI\\\\VEN_10EC&DEV_8168&SUBSYS_E0001458&REV_15\\\\C84CB73C5674000000\",\"MACAddress\":\"74:56:3C:B7:4C:C8\",\"Installed\":\"True\",\"NetEnabled\":\"True\",\"NetConnectionID\":\"Ethernet 2\",\"PhysicalAdapter\":\"True\",\"TimeOfLastReset\":\"24-11-2024 08:40:57 AM\"},\"4\":{\"Name\":\"VirtualBox Host-Only Ethernet Adapter\",\"Description\":\"VirtualBox Host-Only Ethernet Adapter\",\"PNPDeviceID\":\"ROOT\\\\NET\\\\0000\",\"MACAddress\":\"0A:00:27:00:00:0E\",\"Installed\":\"True\",\"NetEnabled\":\"True\",\"NetConnectionID\":\"Ethernet 3\",\"PhysicalAdapter\":\"True\",\"TimeOfLastReset\":\"24-11-2024 08:40:57 AM\"}},\"CPU\":{\"CPU0\":{\"Name\":\"AMD Ryzen 5 5600G with Radeon Graphics\",\"NumberOfCores\":\"6\",\"ThreadCount\":\"12\",\"NumberOfLogicalProcessors\":\"12\",\"Manufacturer\":\"AuthenticAMD\",\"AddressWidth\":\"64\",\"L2CacheSize\":\"3072\",\"L3CacheSize\":\"16384\",\"MaxClockSpeed\":\"3901\",\"ExtClock\":\"100\",\"SocketDesignation\":\"AM4\",\"Version\":\"Model 0, Stepping 0\",\"Caption\":\"AMD64 Family 25 Model 80 Stepping 0\",\"Family\":\"107\",\"Stepping\":\"0\",\"VirtualizationFirmwareEnabled\":\"True\",\"ProcessorID\":\"178BFBFF00A50F00\"}},\"Operating System\":{\"Microsoft Windows 11 Education|C:\\\\Windows|\\\\Device\\\\Harddisk2\\\\Partition3\":{\"Caption\":\"Microsoft Windows 11 Education\",\"InstallDate\":\"08-12-2023 01:41:45 PM\",\"CSName\":\"EGG-PC\",\"LastBootUpTime\":\"24-11-2024 08:40:57 AM\",\"LocalDateTime\":\"07-12-2024 10:21:49 AM\",\"Distributed\":\"False\",\"NumberOfUsers\":\"2\",\"Version\":\"10.0.22631\",\"BootDevice\":\"\\\\Device\\\\HarddiskVolume3\",\"BuildNumber\":\"22631\",\"BuildType\":\"Multiprocessor Free\",\"Manufacturer\":\"Microsoft Corporation\",\"OSArchitecture\":\"64-bit\",\"MUILanguages\":\"{en-US}\",\"PortableOperatingSystem\":\"False\",\"Primary\":\"True\",\"RegisteredUser\":\"Windows User\",\"SerialNumber\":\"00328-00000-00000-AA490\",\"ServicePackMajorVersion\":\"0\",\"ServicePackMinorVersion\":\"0\",\"SystemDirectory\":\"C:\\\\Windows\\\\system32\",\"SystemDrive\":\"C:\",\"WindowsDirectory\":\"C:\\\\Windows\"}},\"GPU\":{\"VideoController1\":{\"Name\":\"NVIDIA GeForce GTX 1050 Ti\",\"PNPDeviceID\":\"PCI\\\\VEN_10DE&DEV_1C82&SUBSYS_A45419DA&REV_A1\\\\4&1C5D7D4&0&0009\",\"CurrentBitsPerPixel\":\"32\",\"CurrentHorizontalResolution\":\"1366\",\"CurrentVerticalResolution\":\"768\",\"CurrentRefreshRate\":\"75\",\"MaxRefreshRate\":\"75\",\"MinRefreshRate\":\"50\",\"AdapterDACType\":\"Integrated RAMDAC\",\"AdapterRAM\":\"4293918720\",\"DriverDate\":\"15-10-2024 05:30:00 AM\",\"DriverVersion\":\"32.0.15.6603\",\"VideoProcessor\":\"NVIDIA GeForce GTX 1050 Ti\"}},\"Mainboard\":{\"Manufacturer\":\"Gigabyte Technology Co., Ltd.\",\"Model\":\"\",\"Product\":\"B550M AORUS ELITE\",\"SerialNumber\":\"Default string\",\"Version\":\"x.x\",\"PNPDeviceID\":\"ACPI\\\\PNP0C01\\\\C8\"}}"
+				},
+				{
+					"name": "wrong or empty fileid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "test_IrwBXrIbb5TkmAjSEzD5nOYTQTjmhkZvUuoyGyXBPyKERgCLqnt8WylgvwMXZxFX",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ferrum-web.onrender.com/files/use?fileid=fileuploader/jzxfvs7jsppzc",
+							"protocol": "https",
+							"host": [
+								"ferrum-web",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"files",
+								"use"
+							],
+							"query": [
+								{
+									"key": "fileid",
+									"value": "fileuploader/jzxfvs7jsppzc"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 01 Apr 2025 09:17:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1c-rse+oIWWZjJFS4zo55aR8QTCsdg\""
+						},
+						{
+							"key": "rndr-id",
+							"value": "bd3bd292-1152-4df4"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9296fe261fe7425a-BOM"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"File not found\"\n}"
+				}
+			]
+		}
+	]
+}

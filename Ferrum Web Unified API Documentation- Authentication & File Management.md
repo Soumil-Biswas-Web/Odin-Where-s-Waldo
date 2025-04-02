@@ -1,12 +1,3 @@
-# F_Web
-
-LIVE API DOCUMENTATION - https://documenter.getpostman.com/view/38110344/2sB2cRDQ31 <br>
-
-Front_End ->  https://f-web-1-l16f.onrender.com/ <br>
-Back_End -> https://ferrum-web.onrender.com/ <br>
-Data_Base -> https://console.neon.tech/app/projects/winter-dust-16648484?branchId=br-morning-voice-a87cpczg <br>
-
-
 # Project: Ferrum Web Unified API Documentation: Authentication & File Management
 This comprehensive API documentation provides a single source of truth for managing user authentication and file operations. It details endpoints for user signup, login, and profile retrieval alongside endpoints for uploading, fetching, and downloading files. Designed for clarity and ease-of-use, the documentation includes request/response examples, parameter descriptions, and error handling guidelines to help developers integrate seamlessly with our services.
 
