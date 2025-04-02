@@ -5,7 +5,7 @@ export default function ChatWindow() {
 
     return(
         <section className="w-[min(590px,100%)]">
-            <div className="flex flex-col justify-around bg-[url('Home/Chat_bg.svg')] bg-contain bg-center h-[800px] py-10 xs:p-10">
+            <div className="flex flex-col justify-around bg-[url('/Home/Chat_bg.svg')] bg-contain bg-center h-[800px] py-10 xs:p-10">
                 <div className="flex justify-start">
                     <ChatBox 
                         sender={"#UltimateLifeform"}
