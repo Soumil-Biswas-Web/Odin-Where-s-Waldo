@@ -27,8 +27,6 @@ env.config();
 
 const sql = neon(process.env.DATABASE_URL);
 
-
-//  I added this bit from chatGPt, test it before making the damn thing live
 const pool = {
   query: async (text, params) => {
     return {
