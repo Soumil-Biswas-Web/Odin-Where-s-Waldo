@@ -40,7 +40,7 @@ export default function SignUp() {
       await axios.post(
         `${import.meta.env.VITE_REACT_SERVER_URL}/auth/signup`,
         data, {
-          headers: { 'x-api-key': import.meta.env.VITE_F_WEB_API_KEY }
+          headers: { 'web-api-key': import.meta.env.VITE_WEB_SECRET }
         }
       );
       // localStorage.setItem("token", response.data);

@@ -11,7 +11,7 @@ export const initializeApp = async () => {
       const response = await axios.get(`${import.meta.env.VITE_REACT_SERVER_URL}/auth/me`, {
         headers: { 
           Authorization: `Bearer ${token}`, 
-          'x-api-key': import.meta.env.VITE_F_WEB_API_KEY
+          'web-api-key': import.meta.env.VITE_WEB_SECRET
         },
       });
       // console.log("user: " + response.data.username);

@@ -52,7 +52,7 @@ export default function Stats () {
             const response = await axios.get(
               `${import.meta.env.VITE_REACT_SERVER_URL}/files/use`, {
                     params: { fileid },
-                    headers: { 'x-api-key': import.meta.env.VITE_F_WEB_API_KEY }
+                    headers: { 'web-api-key': import.meta.env.VITE_WEB_SECRET }
                 }
             );
             console.log(response.data);

@@ -43,10 +43,11 @@ export default function UploadFile() {
         formData.append('file', file); // 'file' is the key expected by your backend
         formData.append('user', user);
         try{
-          const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_URL}/files/upload?user=${user}`, formData, {
+          const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_URL}/files/upload`, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data', // Inform the server about the content type
-                'x-api-key': import.meta.env.VITE_F_WEB_API_KEY
+              Authorization: `Bearer ${token}`, 
+              'Content-Type': 'multipart/form-data', // Inform the server about the content type
+              'web-api-key': import.meta.env.VITE_WEB_SECRET
             },
           });
           console.log(response.data);

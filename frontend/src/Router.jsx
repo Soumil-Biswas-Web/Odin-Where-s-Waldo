@@ -23,7 +23,8 @@ export const router = createHashRouter(
             <Route path="display" element={<Stats />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="/dashboard" element={<Dashboard />}/>
+            <Route path="dashboard" element={<Dashboard />}/>
+            <Route path="upload" element={<UploadFile />} />
 
             <Route
                 path="*"
@@ -32,7 +33,6 @@ export const router = createHashRouter(
                 }}
             />
 
-            <Route path="upload" element={<UploadFile />} />
         </Route>
     ),
     

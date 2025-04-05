@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 // Middleware to verify token
-export const authenticateToken = (req, res, next) => {
+export const authJWToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // Extract token from 'Bearer <token>'
   
@@ -22,9 +22,9 @@ export const authenticateToken = (req, res, next) => {
             console.error('Token verification error:', err);
             return res.status(403).json({ message: 'Could not verify token.' });
         }
-    }
-    console.log('Decoded JWT:', user);
-    console.log(user);
+      }
+      console.log('Decoded JWT:', user);
+      console.log(user);
       req.user = user; // Attach user payload to request
       next();
     });
@@ -52,8 +52,8 @@ export const authRefreshToken = (req, res, next) => {
             console.error('Refresh Token verification error:', err);
             return res.status(403).json({ message: 'Could not verify refresh token.' });
         }
-    }
-    console.log('Decoded JWT:', user); 
+      }
+      console.log('Decoded JWT:', user); 
       req.user = user; // Attach user payload to request
       next();
     });
