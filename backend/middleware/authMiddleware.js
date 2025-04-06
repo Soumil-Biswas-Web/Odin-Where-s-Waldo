@@ -1,5 +1,5 @@
-import { authJWToken } from "./jwt";
-import { authAPIKey } from "./TheAuthAPIInit";
+import { authJWToken } from "./jwt.js";
+import { authAPIKey } from "./TheAuthAPIInit.js";
 
 // Check if the request had jwt or API key
 export const authenticateRequest = (req, res, next) => {

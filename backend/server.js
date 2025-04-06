@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import { authRouter } from './routes/authRouter.js';
 import { filesRouter } from './routes/filesRouter.js';
 import cookieParser from 'cookie-parser';
-import { authMiddleware } from './middleware/TheAuthAPIInit.js';
 
 dotenv.config();
 
@@ -64,9 +63,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-
-// To Require API Keys:
-// app.use(authMiddleware);
 
 app.use("/auth", authRouter);
 app.use("/files", filesRouter);   // Fetch List of Hardware Files from Database

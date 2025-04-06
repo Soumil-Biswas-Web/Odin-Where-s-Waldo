@@ -1,8 +1,8 @@
 import { Router } from "express";
 import bcrypt from 'bcryptjs';
+import { pool } from "../databases/database.js";
 import { authenticateRequest, authWeb } from "../middleware/authMiddleware.js";
 import jwt from 'jsonwebtoken';
-import { pool } from "../databases/database.js";
 import multer from 'multer';
 import { createKey, getKey } from "../middleware/TheAuthAPIInit.js";
 

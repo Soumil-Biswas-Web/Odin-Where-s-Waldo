@@ -1,5 +1,6 @@
 import TheAuthAPI from "theauthapi";
 
+// console.log("Access token: ", process.env.ACCESS_TOKEN)
 const api = new TheAuthAPI(process.env.ACCESS_TOKEN, { retryCount: 5 });
 
 export const authAPIKey = async (req, res, next) => {
@@ -52,7 +53,7 @@ export const getAllKeys = async() => {
 
 export const getKey = async(username) => {
   try {
-    const key = await api.apiKeys.getKeys({
+    const [{key}] = await api.apiKeys.getKeys({
       projectID: process.env.PROJECT_ID,
       name: username,      
     });
