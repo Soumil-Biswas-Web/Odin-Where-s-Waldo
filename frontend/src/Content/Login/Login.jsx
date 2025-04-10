@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ControlledInput from './components/ControlledInput';
-import Button from '../Components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { setUser } from '../../Store/User.js/UserSlice';
+import Heading from '../Header/components/Heading';
 
 // Schema that decides how Form elements are validated while submitting
 const schema = yup
   .object({
-    email_username: yup
+    email: yup
       .string()
       .required("Email is required"),
     password: yup
@@ -71,10 +71,10 @@ export default function Login() {
   
   const formFields = [    // Array of Input fields for the form
     {
-        name: "email_username",
-        label: "Email / Username",
-        type: "text",
-        placeholder: "Enter email / username",
+        name: "email",
+        label: "Email",
+        type: "email",
+        placeholder: "Enter email",
     },
     {
       name: "password",
@@ -85,32 +85,35 @@ export default function Login() {
   ]
 
   return (
-    <div className='flex flex-col items-center h-[70vh] mt-32 justify-center'>
-        <div className="p-10 bg-[--background-color-offset] rounded-[30px] flex flex-col items-center">
-          <h1 className='text-xl font-bold mb-10'>Log In</h1>
-          <form
-              onSubmit={handleSubmit(onSubmit)}
-              id="create-job-form"
-          >
-              {formFields.map((field, index) => (
-                  <ControlledInput
-                  name={field.name}
-                  label={field.label}
-                  control={control}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  error={errors[field.name]?.message}
-                  options={field.options || undefined} // Pass undefined if options is not present
-                  key={index}
-                  />
-              ))}
+    <div className='magic-center justify-stretch bg-background-color sm:bg-background-color-offset w-full h-full min-h-screen'>
+      <div className="absolute magic-center hidden tall:flex justify-center h-[15vh]">
+        <Heading/>
+      </div>
+      <div className="py-10 p-10 sm:px-20 bg-background-color rounded-[30px] flex flex-col items-stretch w-full sm:w-[600px] my-auto">
+        <h1 className='text-xl font-bold mb-10 text-center'>Log In</h1>
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            id="create-job-form"
+        >
+            {formFields.map((field, index) => (
+                <ControlledInput
+                name={field.name}
+                label={field.label}
+                control={control}
+                type={field.type}
+                placeholder={field.placeholder}
+                error={errors[field.name]?.message}
+                options={field.options || undefined} // Pass undefined if options is not present
+                key={index}
+                />
+            ))}
 
-              <div className="flex w-full justify-between px-5">
-                <Button text={"Login"} isSubmit={true}/>
-                <Link to={"/signup"} className='font-bold py-2 px-4 rounded-md border-2 border-[color:--contrast-color] hover:bg-[color:--background-color]'>Sign Up</Link>
-              </div>
-          </form>
-        </div>
+            <div className="flex w-full justify-between px-5">
+              <button className='button-style' type='submit'>Login</button>
+              <Link to={"/signup"} className='button-style'>Sign Up</Link>
+            </div>
+        </form>
+      </div>
     </div>
   )
 }

@@ -1,17 +1,21 @@
 import {
+    Navigate,
     Route,
     createHashRouter,
     createRoutesFromElements,
 } from "react-router-dom";
 import App from "./App";
 import Error from "./Content/Error/Error";
+
+import Bus from "./utils/Bus";
+
 import Home from "./Content/Home/Home";
-import Stats from "./Content/DisplayPage/Stats";
-import UploadFile from "./Content/UploadFile/UploadFile";
+import Header from "./Content/Header/Header";
+import Feed from "./Content/Feed/Feed";
+import NewPost from "./Content/NewPost/NewPost";
+
 import Login from "./Content/Login/Login";
 import SignUp from "./Content/Login/SignUp";
-import Bus from "./utils/Bus";
-import Dashboard from "./Content/Dashboard/Dashboard";
 
 window.flash = (message, type = "success") =>
     Bus.emit("flash", { message, type });
@@ -19,12 +23,15 @@ window.flash = (message, type = "success") =>
 export const router = createHashRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />} errorElement={<Error />}>
-            <Route index element={<Home />} />
-            <Route path="display" element={<Stats />} />
+            <Route index element={<Navigate to={"/home"} />} />
+            <Route path="home" element={<Header />}>
+                <Route index element={<Feed />} />
+                <Route path="newPost" element={<NewPost />} />
+                <Route path="editPost" element={<Feed />} />
+                <Route path="comment" element={<Feed />} />
+            </Route>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="dashboard" element={<Dashboard />}/>
-            <Route path="upload" element={<UploadFile />} />
 
             <Route
                 path="*"

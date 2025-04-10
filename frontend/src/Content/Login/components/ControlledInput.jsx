@@ -2,6 +2,9 @@ import React from 'react'
 import { Controller } from 'react-hook-form'
 
 function ControlledInput({ name, label, control, type, placeholder, error, options }) {
+
+    const fieldStyles = "mt-1 w-full outline-none border-[1px] rounded-md border-contrast-color bg-background-color py-2 px-4";
+
     return (
         <div className='mb-4'>
             <label className='block font-medium mb-1'>{label}<span className="text-red-500">*</span></label>
@@ -21,7 +24,7 @@ function ControlledInput({ name, label, control, type, placeholder, error, optio
                                     field.onChange(e); // Ensure react-hook-form handles the change
                                 }}
                                 placeholder= {options.default}
-                                className="mt-1 w-full outline-none border-b border-transparent focus:border-[color:--contrast-color] py-2 px-4 bg-[image:--background-gradient]"
+                                className={fieldStyles}
                             >
                                 {Object.entries(options).map(([key, value]) => 
                                 (
@@ -43,7 +46,7 @@ function ControlledInput({ name, label, control, type, placeholder, error, optio
                                     field.onChange(e); // Ensure react-hook-form handles the change
                                 }}
                                 placeholder={placeholder}
-                                className="mt-1 w-full outline-none border-b border-transparent focus:border-[color:--contrast-color] py-2 px-4 bg-[image:--background-gradient]"
+                                className={fieldStyles}
                             ></textarea>
                         )}
 
@@ -57,7 +60,7 @@ function ControlledInput({ name, label, control, type, placeholder, error, optio
                                     field.onChange(e); // Ensure react-hook-form handles the change
                                 }}
                                 placeholder={placeholder}
-                                className="mt-1 w-full outline-none border-b border-transparent focus:border-[color:--contrast-color] py-2 px-4 bg-[image:--background-gradient]"
+                                className={fieldStyles}
                             />
                         )}
                     </>                    

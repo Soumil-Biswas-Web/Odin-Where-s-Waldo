@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ob_User {
+  id                String      @id @default(cuid())
+  username          String      @unique
+  password          String      @db.VarChar(255)
+  name              String?     @db.VarChar(255)
+  profilePicture    ob_Image
+  posts             ob_Post[]   @relation("UserPosts")
+}
+
+model ob_Post {
+  user      ob_User         @relation(fields: [userId], references: [id], name: "UserPosts")
+  userId    String          @db.VarChar(255)
+  id        String          @id @default(cuid())
+  text      String          @db.Text
+  image     ob_Image
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt    
+  likes     Int
+  comments  ob_Comment[]
+}
+
+model ob_Image {
+  id        String       @id @default(cuid())
+  name      String
+  url       String
+  size      Int
+  user      ob_User?     @relation(fields: [userId], references: [id])
+  userId    String?
+  post      ob_Post?     @relation(fields: [postId], references: [id])
+  postId    String?
+  publicId  String
+  createdAt DateTime     @default(now())
+}
+
+model ob_Comment {
+  id                String          @id @default(cuid())
+  text              String          @db.VarChar(255)
+  likes             Int
+  post              ob_Post         @relation(fields: [postId], references: [id])
+  postId            String
+  parentComment     ob_Comment?     @relation("Children", fields: [parentCommentId], references: [id])
+  parentCommentId   String?
+  comments          ob_Comment[]    @relation("Children")
+}

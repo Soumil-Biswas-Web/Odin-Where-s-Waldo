@@ -10,8 +10,8 @@
 }
 
 :root {
-    --background-color:#222436;
-    --background-color-offset:#2B315E;
+    --background-color:#040404;
+    --background-color-offset:#3a3a3a;
     --background-gradient: linear-gradient(to top, #222436, #2B315E);
     --highlight-color: #00F227;
     --highlight-hover-color: #01AC1C;
@@ -21,18 +21,22 @@
 }
 
 [data-theme="light"] {
-    --background-color:#F8F8F8;
-    --background-color-offset:#D9D9D9;
+    --background-color:#FFFFFF;
+    --background-color-offset:#F8F8F8;
     --background-gradient: linear-gradient(to top, #F8F8F8, #D9D9D9);
     --highlight-color: #F2CA00;
     --highlight-hover-color: #cead06;
     --highlight-gradient: linear-gradient(to bottom right, #F2CA00, #FF2B00);
-    --contrast-color:#000000;
-    --contrast-color-offset:#040404;
+    --contrast-color:#040404;
+    --contrast-color-offset:#3a3a3a;
 }
 
 body{
     color: var(--contrast-color); 
+}
+
+@layer components {
+  .button-style {@apply border-2 border-contrast-color bg-background-color font-bold hover:bg-contrast-color rounded-md px-4 py-1 transition-theme hover:text-background-color}
 }
 
 .transition-theme{

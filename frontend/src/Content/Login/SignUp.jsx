@@ -6,6 +6,7 @@ import ControlledInput from './components/ControlledInput';
 import Button from '../Components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Heading from '../Header/components/Heading';
 
 // Schema that decides how Form elements are validated while submitting
 const schema = yup
@@ -98,34 +99,35 @@ export default function SignUp() {
   ]
 
   return (
-    <div className='flex flex-col items-center h-[70vh] mt-32 justify-center'>
-        <div className="p-10 bg-[--background-color-offset] rounded-[30px] flex flex-col items-center">
-          <h1 className='text-xl font-bold mb-10'>Sign Up</h1>
-          <form
-              onSubmit={handleSubmit(onSubmit)}
-              id="create-job-form"
-          >
-              {formFields.map((field, index) => (
-                  <ControlledInput
-                  name={field.name}
-                  label={field.label}
-                  control={control}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  error={errors[field.name]?.message}
-                  options={field.options || undefined} // Pass undefined if options is not present
-                  key={index}
-                  />
-              ))}
+    <div className='magic-center justify-stretch bg-background-color sm:bg-background-color-offset w-full h-full min-h-screen'>
+      <div className="absolute magic-center hidden tall:flex justify-center h-[15vh]">
+        <Heading/>
+      </div>
+      <div className="py-10 p-10 sm:px-20 bg-background-color rounded-[30px] flex flex-col items-stretch w-full sm:w-[600px] my-auto">
+        <h1 className='text-xl font-bold mb-10 text-center'>Sign Up</h1>
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            id="create-job-form"
+        >
+            {formFields.map((field, index) => (
+                <ControlledInput
+                name={field.name}
+                label={field.label}
+                control={control}
+                type={field.type}
+                placeholder={field.placeholder}
+                error={errors[field.name]?.message}
+                options={field.options || undefined} // Pass undefined if options is not present
+                key={index}
+                />
+            ))}
 
-              <div className="flex w-full justify-between px-5 gap-5">
-                <button className='font-bold py-2 px-4 rounded-md border-2 border-[color:--contrast-color] hover:bg-[color:--background-color]' type='submit'>Sign Up</button>
-                <Link to={"/login"} className='flex'>
-                  <Button text={"Login instead"} />
-                </Link>
-              </div>
-          </form>
-        </div>
+            <div className="flex w-full justify-between px-5 gap-5">
+              <button className='button-style' type='submit'>Sign Up</button>
+              <Link to={"/login"} className='button-style'>Login Instead</Link>
+            </div>
+        </form>
+      </div>
     </div>
   )
 }
