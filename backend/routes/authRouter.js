@@ -1,38 +1,45 @@
 import { Router } from "express";
 import bcrypt from 'bcryptjs';
-import { pool } from "../databases/database.js";
-import { authenticateRequest, authWeb } from "../middleware/authMiddleware.js";
+import { authenticateRequest } from "../middleware/authMiddleware.js";
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
-import { createKey, getKey } from "../middleware/TheAuthAPIInit.js";
+import prisma from "../middleware/prismaInit.js";
 
 const parseForm = multer().none();
 
-const authRouter = Router();
+const route = Router();
 
 // /auth/me Route to verify user
 
-authRouter.get('/me', authenticateRequest, async (req, res) => {
+route.get('/me', authenticateRequest, async (req, res) => {
   try {
     console.log('Request User:', req.user); // Log the user from the JWT
-    const { email } = req.user;
+    const { username } = req.user;
 
-    if (!email) {
-      return res.status(400).json({ message: 'Invalid user email in token' });
+    if (!username) {
+      return res.status(400).json({ message: 'Invalid user username in token' });
     }
 
-    const { rows:users } = await pool.query(
-      'SELECT id, username, email FROM users WHERE email = $1',
-      [email]
-    );
+    // const { rows:users } = await pool.query(
+    //   'SELECT id, username, email FROM users WHERE email = $1',
+    //   [email]
+    // );
 
-    console.log('Database Query Result: ', users); // Log the database query result
+    const user = await prisma.ob_User.findUnique({
+      where: {username},
+      select: {
+        id: true,
+        username: true,
+      }
+    })
 
-    if (users.length === 0) {
+    console.log('Database Query Result: ', user); // Log the database query result
+
+    if (user === null) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.json(users[0]); // Respond with user details
+    res.json(user); // Respond with user details
   } catch (error) {
     console.error('Error fetching user:', error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -40,24 +47,28 @@ authRouter.get('/me', authenticateRequest, async (req, res) => {
 });
 
 // POST /login route
-authRouter.post('/login', authWeb, parseForm, async (req, res) => {
+route.post('/login', parseForm, async (req, res) => {
   console.log(`Request Body: ${JSON.stringify(req.body)}`);
-  const { email_username, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!email_username || !password) {
-    return res.status(400).json({success: false, message: "Bad Request: Missing email_username or password."});
+  if (!username || !password) {
+    return res.status(400).json({success: false, message: "Bad Request: Missing username or password."});
   }
 
   try {
     // Check if user exists in DB
-    const { rows: users } = await pool.query(
-        'SELECT * FROM users WHERE username = $1 OR email = $2',
-        [email_username, email_username]
-    );
+    // const { rows: users } = await pool.query(
+    //     'SELECT * FROM users WHERE username = $1 OR email = $2',
+    //     [email_username, email_username]
+    // );
 
-    // console.log(users);
+    const user = await prisma.ob_User.findUnique({
+      where: {username}
+    })
 
-    if (users.length === 0) {
+    // console.log(user);
+
+    if (user === null) {
       return res.status(400).json({success: false, message:'User not found'});
     }
 
@@ -65,21 +76,15 @@ authRouter.post('/login', authWeb, parseForm, async (req, res) => {
     let authenticatedUser = null;
     
     // Compare Passwords
-    for (const user of users) {
-      const match = await bcrypt.compare(password, user.password);
-      if (match) {
-          isAuthenticated = true;
-          authenticatedUser = user;
-          break;
-      }
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+        isAuthenticated = true;
+        authenticatedUser = user;
     }
 
     if (!isAuthenticated) {
       return res.status(400).json({success: false, message:"Invalid password"});
     }
-
-    // Create API Key (For desktop app)
-    const apiKey = await getKey(authenticatedUser.username);
 
     // Sign JWT
     const token = jwt.sign(
@@ -102,7 +107,7 @@ authRouter.post('/login', authWeb, parseForm, async (req, res) => {
         maxAge: 3 * 24 * 60 * 60 * 1000   // 3 Days
     });
   
-    res.json({ token, key: apiKey, username: authenticatedUser.username });
+    res.json({ token, username: authenticatedUser.username });
   } catch (error) {
     console.error('Error Logging in:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });;
@@ -110,7 +115,7 @@ authRouter.post('/login', authWeb, parseForm, async (req, res) => {
 });
 
 // POST /refresh route
-authRouter.post('/refresh', authWeb, (req, res) => {
+route.post('/refresh', (req, res) => {
   if (req.cookies?.jwt) {
     // Destructuring refreshToken from cookie
     const refreshToken = req.cookies.jwt;
@@ -136,23 +141,28 @@ authRouter.post('/refresh', authWeb, (req, res) => {
 })
 
 // POST  /signup route
-authRouter.post('/signup', authWeb, parseForm, async (req, res) => {
+route.post('/signup', parseForm, async (req, res) => {
   console.log(`Signup request: ${JSON.stringify(req.body)}`);
-  const { email, username, password } = req.body;
+  const { username, password } = req.body;
     
   try {
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Insert user into database
-      await pool.query(
-          'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)',
-          [username, email, hashedPassword]
-      );
+      // await pool.query(
+      //     'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)',
+      //     [username, email, hashedPassword]
+      // );
 
-      const apiKey = await createKey({ email, username });
+      await prisma.ob_User.create({
+        data: {
+          username,
+          password: hashedPassword,
+        }
+      })
 
-      res.status(201).json({message:'User created successfully', key:apiKey});
+      res.status(201).json({message:'User created successfully'});
       } catch (error) {
         if (error.code === '23505') {
           res.status(400).json({success: false, message:'Email is already in use'});
@@ -164,4 +174,4 @@ authRouter.post('/signup', authWeb, parseForm, async (req, res) => {
 
 })
 
-export {authRouter};
+export default route;

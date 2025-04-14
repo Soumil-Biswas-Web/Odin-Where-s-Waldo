@@ -8,13 +8,14 @@ import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { setUser } from '../../Store/User.js/UserSlice';
 import Heading from '../Header/components/Heading';
+import catchError from '../../assets/js/catchError';
 
 // Schema that decides how Form elements are validated while submitting
 const schema = yup
   .object({
-    email: yup
+    username: yup
       .string()
-      .required("Email is required"),
+      .required("Username is required"),
     password: yup
       .string()
       .min(8, "Password must be at least 8 characters")
@@ -32,38 +33,22 @@ export default function Login() {
   const apiLogin = async(data) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_REACT_SERVER_URL}/auth/login`,
-        data, {
-          headers: { 'web-api-key': import.meta.env.VITE_WEB_SECRET }
-        }
+        `${import.meta.env.VITE_REACT_SERVER_URL}/auth/login`, data
       );
       const { token, username } = response.data;
       // console.log(token);
       localStorage.setItem('token', token);
       flash("Logged in successfully");
-      dispatch(setUser({ user:username, token }));
+      dispatch(setUser({ username, token }));
       // console.log(response.data.username);
-      navigate("/dashboard");
+      navigate("/home");
     } catch (e) {
-      let msg;
-      // Enhanced error handling
-      if (e.response) {
-        // Server responded with a status code other than 2xx
-        msg = `Error ${e.response.status}: ${e.response.data || "Server error"}`;
-      } else if (e.request) {
-        // Request was made but no response received
-        msg = "No response received from server";
-      } else {
-        // Something else caused the error
-        msg = ("Error:", e.message)
-      }
-      console.log(msg);
-      flash(msg, "Error");
+      catchError(e);
     }
   }
   
   const onSubmit = (data) => { 
-    // console.log(data);
+    console.log(data);
     apiLogin(data);
   }
   
@@ -71,10 +56,10 @@ export default function Login() {
   
   const formFields = [    // Array of Input fields for the form
     {
-        name: "email",
-        label: "Email",
-        type: "email",
-        placeholder: "Enter email",
+        name: "username",
+        label: "Username",
+        type: "text",
+        placeholder: "Enter username",
     },
     {
       name: "password",
@@ -109,7 +94,7 @@ export default function Login() {
             ))}
 
             <div className="flex w-full justify-between px-5">
-              <button className='button-style' type='submit'>Login</button>
+              <button className='button-style' type="submit">Login</button>
               <Link to={"/signup"} className='button-style'>Sign Up</Link>
             </div>
         </form>

@@ -9,7 +9,7 @@ import feedData from '../../assets/js/feedData';
 
 
 export default function Header() {
-    const user = useSelector((state) => state.userReducer.user);
+    const user = useSelector((state) => state.userReducer);
     // const user = feedData[0].user;
     // console.log(user);
 
@@ -23,9 +23,9 @@ export default function Header() {
                 <div className="magic-center w-full shrink-0 md:w-[500px] sm:border-x-2 border-contrast-color">
                     <MobileHeader/>
                     <div className='hidden md:flex justify-between w-full border-b-2 border-contrast-color p-3'>
-                        {(user === null)
+                        {(user.username === null)
                             ? <Link to="/login" className='font-semibold'>Login</Link>
-                            : <Link className='font-bold'>{user.name}</Link>
+                            : <Link className='font-bold'>{user.username}</Link>
                         }
                         <LightMode/>     
                     </div>

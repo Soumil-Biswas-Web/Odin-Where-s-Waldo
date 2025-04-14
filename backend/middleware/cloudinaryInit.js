@@ -12,7 +12,7 @@ export function uploadToCloudinary(file) {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          resource_type: "raw",
+          resource_type: "auto",
           folder: "fileuploader"
         },
         (error, result) => {
@@ -20,7 +20,7 @@ export function uploadToCloudinary(file) {
             console.error("Cloudinary upload error:", error);
             return reject(error);
           }
-          console.log("Cloudinary upload result:", result);
+          // console.log("Cloudinary upload result:", result);
           resolve(result);
         }
       );

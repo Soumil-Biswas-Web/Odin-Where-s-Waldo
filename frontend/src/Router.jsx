@@ -16,6 +16,8 @@ import NewPost from "./Content/NewPost/NewPost";
 
 import Login from "./Content/Login/Login";
 import SignUp from "./Content/Login/SignUp";
+import EditPost from "./Content/EditPost/EditPost";
+import PostPage from "./Content/CommentPage/PostPage";
 
 window.flash = (message, type = "success") =>
     Bus.emit("flash", { message, type });
@@ -25,10 +27,10 @@ export const router = createHashRouter(
         <Route path="/" element={<App />} errorElement={<Error />}>
             <Route index element={<Navigate to={"/home"} />} />
             <Route path="home" element={<Header />}>
-                <Route index element={<Feed />} />
+                <Route index loader={Feed.loader} element={<Feed />} />
                 <Route path="newPost" element={<NewPost />} />
-                <Route path="editPost" element={<Feed />} />
-                <Route path="comment" element={<Feed />} />
+                <Route path="editPost/:postId" loader={EditPost.loader} element={<EditPost />} />
+                <Route path="postPage/:postId" loader={PostPage.loader} element={<PostPage />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />

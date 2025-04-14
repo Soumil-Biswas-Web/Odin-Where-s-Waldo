@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: null, // User data
+    username: null, // User data
     token: null, // Authentication token
 };
 
@@ -10,12 +10,12 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action) {
-            const { user, token } = action.payload || {};
-            state.user = user ?? null; // Default to null if undefined
+            const { username, token } = action.payload || {};
+            state.username = username ?? null; // Default to null if undefined
             state.token = token ?? null; // Default to null if undefined
         },
         clearUser(state) {
-            state.user = null;
+            state.username = null;
             state.token = null;
         },
     }

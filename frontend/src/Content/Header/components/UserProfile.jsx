@@ -5,6 +5,7 @@ import Login from './Login'
 import UserBit from '../../Components/UserBit'
 import { useDispatch, useSelector } from 'react-redux'
 import feedData from '../../../assets/js/feedData'
+import { clearUser } from '../../../Store/User.js/UserSlice'
 
 export default function UserProfile() {
     
@@ -12,7 +13,7 @@ export default function UserProfile() {
 
     const dispatch = useDispatch();   // To set Global variable setUser
 
-    const user = useSelector((state) => state.userReducer.user);
+    const user = useSelector((state) => state.userReducer);
     // const user = feedData[0].user;
     console.log(user);
 
@@ -31,12 +32,12 @@ export default function UserProfile() {
         <Link to={"/"}>
             <Heading isSmol={true}/>
         </Link>
-        {(user === null)
+        {(user.username === null)
             ? 
             <Login />
             : 
             <>
-                <UserBit user={user}/>
+                <UserBit user={user.username}/>
                 <button
                     className='button-style'
                     onClick={handleLogout}

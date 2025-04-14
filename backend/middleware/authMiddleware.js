@@ -1,5 +1,4 @@
 import { authJWToken } from "./jwt.js";
-import { authAPIKey } from "./TheAuthAPIInit.js";
 
 // Check if the request had jwt or API key
 export const authenticateRequest = (req, res, next) => {
@@ -8,7 +7,7 @@ export const authenticateRequest = (req, res, next) => {
       return authJWToken(req, res, next);
     }
     if (req.headers["x-api-key"]) {
-      return authAPIKey(req, res, next);
+      throw new Error("Hey! no APIs in this household!")
     }
   } catch (error) {
     console.error('Cannot authenticate request');

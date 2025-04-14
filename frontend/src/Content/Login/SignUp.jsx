@@ -7,6 +7,7 @@ import Button from '../Components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Heading from '../Header/components/Heading';
+import catchError from '../../assets/js/catchError';
 
 // Schema that decides how Form elements are validated while submitting
 const schema = yup
@@ -14,10 +15,6 @@ const schema = yup
     username: yup
       .string()
       .required("Username is required"),
-    email: yup
-      .string()
-      .email("Invalid email address")
-      .required("Email is required"),
     password: yup
       .string()
       .min(8, "Password must be at least 8 characters")
@@ -39,30 +36,14 @@ export default function SignUp() {
   const apiSignUp = async(data) => {
     try {
       await axios.post(
-        `${import.meta.env.VITE_REACT_SERVER_URL}/auth/signup`,
-        data, {
-          headers: { 'web-api-key': import.meta.env.VITE_WEB_SECRET }
-        }
+        `${import.meta.env.VITE_REACT_SERVER_URL}/auth/signup`, data
       );
       // localStorage.setItem("token", response.data);
       flash("Created Account successfully");
       console.log("Created Account successfully");
       navigate("/login");
     } catch (e) {
-      let msg;
-      // Enhanced error handling
-      if (e.response) {
-        // Server responded with a status code other than 2xx
-        msg = `Error ${e.response.status}: ${e.response.data || "Server error"}`;
-      } else if (e.request) {
-        // Request was made but no response received
-        msg = "No response received from server";
-      } else {
-        // Something else caused the error
-        msg = ("Error:", e.message);
-      }
-      console.log(msg);
-      flash(msg, "Error");
+      catchError(e);
     }
   }  
 
@@ -74,15 +55,9 @@ export default function SignUp() {
   const formFields = [    // Array of Input fields for the form
     {
       name: "username",
-      label: "User Name",
+      label: "Username",
       type: "text",
-      placeholder: "Enter your user name",
-    },
-    {
-        name: "email",
-        label: "Email",
-        type: "email",
-        placeholder: "Enter your email address",
+      placeholder: "Enter your username",
     },
     {
       name: "password",

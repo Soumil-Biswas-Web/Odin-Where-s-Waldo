@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { authRouter } from './routes/authRouter.js';
-import { filesRouter } from './routes/filesRouter.js';
+import authRouter from './routes/authRouter.js';
+import postRouter from './routes/postRouter.js';
 import cookieParser from 'cookie-parser';
+import errorCatcher from './middleware/errorCatcher.js';
 
 dotenv.config();
 
@@ -14,30 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define the allowed origins
 const allowedOrigins = [
-  (`http://localhost:${PORT}`),       // Your local frontend (adjust port as needed)
+  (`http://localhost:${process.env.FRONTEND_PORT}`),       // Your local frontend (adjust port as needed)
   "https://ferrum-web-frontend.onrender.com"    // Your Render backend or frontend domain if applicable
 ];
-
-
-// Allow requests from specific origin
-// app.use(cors({
-//     origin: (origin, callback) => {
-//       // Allow requests with no origin (e.g., mobile apps or curl requests)
-//       if (!origin) return callback(null, true);
-//       // Check if origin contains "localhost"
-//       if (/^http:\/\/localhost(:\d+)?$/.test(origin)) {
-//         return callback(null, true);
-//       } 
-//       if (origin === "https://f-web-1.onrender.com") {
-
-//       }
-//       else {
-//         return callback(new Error('Not allowed by CORS'));
-//       }
-//     },
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-//     credentials: true // If sending cookies or authorization headers
-// }));
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -65,8 +45,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRouter);
-app.use("/files", filesRouter);   // Fetch List of Hardware Files from Database
+app.use("/posts", postRouter);
 
+app.use(errorCatcher);
 
 // Run when Starting server
 

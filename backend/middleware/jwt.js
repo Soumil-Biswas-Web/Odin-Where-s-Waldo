@@ -24,7 +24,7 @@ export const authJWToken = (req, res, next) => {
         }
       }
       console.log('Decoded JWT:', user);
-      console.log(user);
+      // console.log(user);
       req.user = user; // Attach user payload to request
       next();
     });

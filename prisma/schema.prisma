@@ -8,12 +8,12 @@ datasource db {
 }
 
 model ob_User {
-  id                String      @id @default(cuid())
-  username          String      @unique
-  password          String      @db.VarChar(255)
-  name              String?     @db.VarChar(255)
-  profilePicture    ob_Image
-  posts             ob_Post[]   @relation("UserPosts")
+  id                String        @id @default(cuid())
+  username          String        @unique
+  password          String        @db.VarChar(255)
+  profilePicture    ob_Image?     @relation("UserImage")
+  posts             ob_Post[]     @relation("UserPosts")
+  comments          ob_Comment[]  @relation("UserComments")
 }
 
 model ob_Post {
@@ -21,10 +21,10 @@ model ob_Post {
   userId    String          @db.VarChar(255)
   id        String          @id @default(cuid())
   text      String          @db.Text
-  image     ob_Image
+  image     ob_Image?       @relation("PostImage")
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt    
-  likes     Int
+  likes     Int?
   comments  ob_Comment[]
 }
 
@@ -33,21 +33,23 @@ model ob_Image {
   name      String
   url       String
   size      Int
-  user      ob_User?     @relation(fields: [userId], references: [id])
-  userId    String?
-  post      ob_Post?     @relation(fields: [postId], references: [id])
-  postId    String?
   publicId  String
   createdAt DateTime     @default(now())
+  user      ob_User?     @relation(fields: [userId], references: [id], name: "UserImage")
+  userId    String?      @unique
+  post      ob_Post?     @relation(fields: [postId], references: [id], name: "PostImage")
+  postId    String?      @unique
 }
 
 model ob_Comment {
   id                String          @id @default(cuid())
   text              String          @db.VarChar(255)
-  likes             Int
+  likes             Int?
   post              ob_Post         @relation(fields: [postId], references: [id])
   postId            String
   parentComment     ob_Comment?     @relation("Children", fields: [parentCommentId], references: [id])
   parentCommentId   String?
+  user              ob_User         @relation(fields: [userId], references: [id], name: "UserComments")
+  userId            String          @db.VarChar(255)  
   comments          ob_Comment[]    @relation("Children")
 }

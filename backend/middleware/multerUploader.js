@@ -8,17 +8,17 @@ const upload = multer({
   storage: storage,
   limits: { 
     fileSize: 1024 * 1024 * 5, 
-    files: 5  
+    files: 1  
   }, // 5MB file size limit
   fileFilter: (req, file, cb) => {
-    const filetypes = /json/; // Allowed file types
+    const filetypes = /jpg|jpeg|png/; // Allowed file types
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
 
     if (mimetype && extname) {
       cb(null, true);
     } else {
-      cb(new Error('Only JSON files are allowed!'));
+      cb(new Error('Only .jpg, .jpeg, and .png image files are allowed!'));
     }
   },
 });
