@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // Define the allowed origins
 const allowedOrigins = [
   (`http://localhost:${process.env.FRONTEND_PORT}`),       // Your local frontend (adjust port as needed)
-  "https://ferrum-web-frontend.onrender.com"    // Your Render backend or frontend domain if applicable
+  `${process.env.LIVE_FRONTEND_ADDRESS}`    // Your Render backend or frontend domain if applicable
 ];
 
 app.use(cors({
