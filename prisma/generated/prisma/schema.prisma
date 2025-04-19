@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Oww_Coords {
+  id        String @id @default(uuid())
+  character String
+  xMin      Int
+  xMax      Int
+  yMin      Int
+  yMax      Int
+}
+
+model Oww_LeaderBoard {
+  id        String @id @default(uuid())
+  player    String
+  timeTaken String
+}

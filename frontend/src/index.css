@@ -10,7 +10,7 @@
 }
 
 :root {
-    --background-color:#040404;
+    --background-color:#3a3a3a;
     --background-color-offset:#3a3a3a;
     --background-gradient: linear-gradient(to top, #222436, #2B315E);
     --highlight-color: #00F227;
@@ -111,7 +111,7 @@ body{
   }
   
   .progress.active:before {
-    animation: progress 5s linear forwards;
+    animation: progress 1s linear forwards;
   }
   
   @keyframes progress {

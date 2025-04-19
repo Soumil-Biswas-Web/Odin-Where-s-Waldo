@@ -15,7 +15,7 @@ export const Flash = () => {
             setType(type);
             setTimeout(() => {
                 setVisibility(false);
-            }, 5000);
+            }, 1000);
         });
     }, []);
 
@@ -35,13 +35,13 @@ export const Flash = () => {
                 ease: 'easeInOut',
             }}
             style={{ boxShadow: '0 0 10px #C7C7C7' }}
-            className={`ct-toast shadow-2xl w-[350px] fixed z-[100] bottom-[30px] left-[100%] bg-[--background-color] overflow-hidden rounded-xl px-3 py-2 flex justify-between ${visibility && 'active'}`}>
+            className={`ct-toast shadow-2xl w-[350px] fixed z-[100] bottom-[30px] left-[100%] bg-background-color overflow-hidden rounded-xl px-3 py-2 flex justify-between ${visibility && 'active'}`}>
             <div className="message flex flex-col">
                 <span className="capitalize ft-medium">{type}</span>
-                <div className="text-sm ft-light text-[--contrast-color-offset]">{message}</div>
+                <div className="text-sm ft-light text-contrast-color-offset">{message}</div>
             </div>
             <IoClose className='opacity-80 cursor-pointer' onClick={() => { setVisibility(false) }} />
-            <div className={`progress ${visibility && 'active'}`}></div>
+            {/* <div className={`progress ${visibility && 'active'}`}></div> */}
         </motion.div>
     )
 }

@@ -42,7 +42,7 @@ export const plugins = [
       '.scrollbar-none': {
         '-ms-overflow-style': 'none',  /* IE and Edge */
         'scrollbar-width': 'none'     /* Firefox */
-      }
+      },
     })
   })
 ];
